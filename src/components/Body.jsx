@@ -48,7 +48,7 @@ if(AllRestaurant.length===0) return <h1>Data is Loading</h1>
   {
     filteredRestaurant.length===0?(<h1>No match found</h1>):(
       filteredRestaurant.map((item)=>(
-        <Link to={item.info.id} key={item.info.id}>
+        <Link to={`/restaurant/${item.info.id}`} key={item.info.id}>
         <Restaurant_Card {...item.info}  />
        </Link>
       ))

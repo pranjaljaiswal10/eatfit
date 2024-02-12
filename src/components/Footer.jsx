@@ -5,7 +5,7 @@ const Footer = () =>{
     <p>&copy; All Right Reserverd</p>
     <div className="social_media_handle">
       <ul>
-        <li><a href="">linkedi</a></li>
+        <li><a href="">linkedin</a></li>
         <li>twitter</li>
         <li>github</li>
         <li>hashnode</li>

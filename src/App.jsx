@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Signup from './components/Signup';
 import Cart from './components/Cart';
 import Favourite from './components/Favourite';
+import Restaurant_Menu from './components/Restaurant_Menu';
 import './App.css'
 
 const AppLayout=()=>{
@@ -44,6 +45,9 @@ const appRouter=createBrowserRouter([{
     },{
    path:"/favourite",
    element:<Favourite/>
+    },{
+      path:"/restaurant/:resId",
+      element:<Restaurant_Menu/>
     }
   ]
 }])
