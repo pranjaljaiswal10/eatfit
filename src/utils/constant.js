@@ -9,3 +9,5 @@ export const SWIGGY_API_URL="https://www.swiggy.com/dapi/restaurants/list/v5?lat
 export const SWIGGY_ITEM_URL="Https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.4358011&lng=81.846311&restaurantId="
 
 export const LOGO_URL= "https://djgt4pi2uqo7n.cloudfront.net/prod/assets/images/eatfit-logo-horizontal.svg"
+
+export const CART_IMAGE_ID="2xempty_cart_yfxml0"

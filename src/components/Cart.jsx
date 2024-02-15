@@ -1,7 +1,11 @@
 
+import { CART_IMAGE_ID } from "../utils/constant";
 
 const Cart = () => {
-  return <div>Cart</div>;
+
+  return (
+  <></>
+  )
 };
 
 export default Cart;

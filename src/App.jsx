@@ -9,12 +9,19 @@ import Signup from './components/Signup';
 import Cart from './components/Cart';
 import Favourite from './components/Favourite';
 import Restaurant_Menu from './components/Restaurant_Menu';
+
+
 import './App.css'
+
+
+
+
 
 const AppLayout=()=>{
   return(
       <>
-      <Header/>
+      
+       <Header/>        
       <Outlet/>
       <Footer/>
       </>
@@ -47,7 +54,8 @@ const appRouter=createBrowserRouter([{
    element:<Favourite/>
     },{
       path:"/restaurant/:resId",
-      element:<Restaurant_Menu/>
+      element:
+      <Restaurant_Menu/>
     }
   ]
 }])

@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { LOGO_URL } from "../utils/constant";
 
+
 const Header = () => {
+  
 return(
   <>
   <div className="logo">
