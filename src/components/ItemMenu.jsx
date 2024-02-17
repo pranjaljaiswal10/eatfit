@@ -1,10 +1,13 @@
 //import { useDispatch } from "react-redux"
 //import { addItem } from "../utils/cartSlice";
+import { useContext } from "react";
 import { IMG_CDN_URL } from "../utils/constant"
+import { DetailContext } from "../utils/detailContext";
 
 
 const ItemMenu = ({name:dishName,description,imageId,price,defaultPrice}) =>{
-
+    const [detail]=useContext(DetailContext)
+    console.log(detail)
     return(
         <>
         <h1>{dishName}</h1>
