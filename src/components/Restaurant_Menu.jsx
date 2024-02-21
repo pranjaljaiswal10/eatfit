@@ -1,17 +1,19 @@
-import { useContext, useEffect, useState, } from "react";
+import {  useEffect, useState, } from "react";
 import { useParams } from "react-router-dom";
 import { SWIGGY_ITEM_URL } from "../utils/constant";
 import Item_Category from "./Item_Category";
 import Nested_Item_Category from "./Nested_Item_Category";
-import { DetailContext } from "../utils/detailContext";
+
+
 
 
 
 const Restaurant_Menu = () => {
   const {resId}=useParams()
   const [restaurantMenuDetail,setRestaurantMenuDetail]=useState([]);
-  const setDetails=useContext(DetailContext)
-  
+ 
+
+
   useEffect(()=>{
       async function getData(){
         const response=await fetch(`${SWIGGY_ITEM_URL}${resId}`)
@@ -24,10 +26,9 @@ const Restaurant_Menu = () => {
 
 
     if(restaurantMenuDetail.length===0) return <h1>Data is loading...</h1>
-  const  {cuisines,name,avgRatingString,areaName,sla,feeDetails,totalRatingsString,costForTwoMessage,cloudinaryImageId}=restaurantMenuDetail[0]?.card?.card?.info||{};
-   const detail={resName:name,street:areaName,imageId:cloudinaryImageId}   
-  setDetails(detail)
-   const {cards}=restaurantMenuDetail[2]?.groupedCard?.cardGroupMap?.REGULAR || {};
+  const  {cuisines,name,avgRatingString,areaName,sla,feeDetails,totalRatingsString,costForTwoMessage}=restaurantMenuDetail[2]?.card?.card?.info||{} 
+   const {cards}=restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR || {};
+  
   return ( 
    
  restaurantMenuDetail.length===0?(<h1>Data is loading</h1>):( <>
@@ -50,7 +51,7 @@ const Restaurant_Menu = () => {
   {
   
     cards.map((item)=>(
-      item?.card?.card?.["@type"]=== "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"?<Item_Category {...item?.card?.card} list={detail}  key={item.card.card.title} />: item?.card?.card?.["@type"]=== "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"  && <Nested_Item_Category {...item?.card?.card}  key={item.card.card.title}/>
+      item?.card?.card?.["@type"]=== "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"?<Item_Category {...item?.card?.card}   key={item.card.card.title} />: item?.card?.card?.["@type"]=== "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"  && <Nested_Item_Category {...item?.card?.card}  key={item.card.card.title}/>
  
     ))
   }

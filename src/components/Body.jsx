@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { SWIGGY_API_URL } from "../utils/constant";
 import { filteredData } from "../utils/helper";
 import Restaurant_Card from "./Restaurant_Card";
+import Shimmer from "./Shimmer";
 
 
 
@@ -35,16 +36,16 @@ const Body = () => {
   }
 if(!AllRestaurant) return null;
 
-if(AllRestaurant.length===0) return <h1>Data is Loading</h1>
+if(AllRestaurant.length===0) return <Shimmer/>
   return (
-    <>
-    
-  <div className="search_input">
-  <input type="text" className="" value={searchTxt} onChange={(e)=>setSearchTxt(e.target.value)}/>
-  <button onClick={handleClick}>search</button>
+  
+ <div className="body m-8 ">
+ <div className="search_input">
+  <input type="text" className="mx-8 w-1/6 outline-4 rounded" value={searchTxt} onChange={(e)=>setSearchTxt(e.target.value)}/>
+  <button onClick={handleClick} className="bg-lime-300 py-2 px-4 rounded-md">search</button>
   </div>
-  <button>Top Rated Restaurant</button>
- <div className="restaurant-list">
+  <button className="font-semibold bg-gray-200 p-2 rounded-md">Top Rated Restaurant</button>
+  <div className="flex flex-wrap justify-evenly">
   {
     filteredRestaurant.length===0?(<h1>No match found</h1>):(
       filteredRestaurant.map((item)=>(
@@ -55,7 +56,7 @@ if(AllRestaurant.length===0) return <h1>Data is Loading</h1>
     )
   }
  </div>
-  </>
+ </div>
     )
 };
 export default Body;

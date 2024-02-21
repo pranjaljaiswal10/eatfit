@@ -5,12 +5,12 @@ import { createBrowserRouter,Outlet, RouterProvider } from 'react-router-dom';
 import Error from './components/Error';
 import About from './components/About';
 import Contact from './components/Contact';
-import Signup from './components/Signup';
 import Cart from './components/Cart';
 import Favourite from './components/Favourite';
 import Restaurant_Menu from './components/Restaurant_Menu';
-
-
+import Login from './components/Login';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
 import './App.css'
 
 
@@ -20,10 +20,11 @@ import './App.css'
 const AppLayout=()=>{
   return(
       <>
-      
+     <Provider store={appStore}>
        <Header/>        
       <Outlet/>
       <Footer/>
+     </Provider>
       </>
   )
 }
@@ -44,8 +45,8 @@ const appRouter=createBrowserRouter([{
       path:"/contact",
       element:<Contact/>
     },{
-      path:"/signup",
-      element:<Signup/>
+      path:"/login",
+      element:<Login/>
     },{
       path:"/cart",
       element:<Cart/>
