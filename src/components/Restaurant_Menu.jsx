@@ -3,15 +3,19 @@ import { useParams } from "react-router-dom";
 import { SWIGGY_ITEM_URL } from "../utils/constant";
 import Item_Category from "./Item_Category";
 import Nested_Item_Category from "./Nested_Item_Category";
+import { FaHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../utils/favouriteSlice";
 
 
 
 
 
 const Restaurant_Menu = () => {
+  const dispatch=useDispatch()
   const {resId}=useParams()
   const [restaurantMenuDetail,setRestaurantMenuDetail]=useState([]);
- 
+ const favouriteItem=useSelector(store=>store.favourite.items)
 
 
   useEffect(()=>{
@@ -26,28 +30,34 @@ const Restaurant_Menu = () => {
 
 
     if(restaurantMenuDetail.length===0) return <h1>Data is loading...</h1>
-  const  {cuisines,name,avgRatingString,areaName,sla,feeDetails,totalRatingsString,costForTwoMessage}=restaurantMenuDetail[2]?.card?.card?.info||{} 
-   const {cards}=restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR || {};
+  const  {cuisines,name,avgRatingString,areaName,sla,feeDetails,totalRatingsString,costForTwoMessage,cloudinaryImageId,id}=restaurantMenuDetail[2]?.card?.card?.info||{} 
+  const list={imageId:cloudinaryImageId,name:name,rating:avgRatingString,sla:sla,cuisines:cuisines,areaName:areaName,id}
+  const handleAddFavourite=()=>{
+    const found=favouriteItem.some(item=>item.name.includes(name))
+   if(!found)
+    dispatch(addItem(list))
+  }
+  const {cards}=restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR || {};
   
   return ( 
    
- restaurantMenuDetail.length===0?(<h1>Data is loading</h1>):( <>
-    <div className="restaurant-name">
-    <h1>{name}</h1>
-    <h2>{avgRatingString}</h2>
-  </div>
-  <div className="restaurant-detail">
-    <ul>
-      <li>{cuisines.join(",")}</li>
-      <li>{`${areaName}, ${sla.lastMileTravelString}`}</li>
-      <li>{totalRatingsString}</li>
-      <li><ul>
-        <li>{`${sla.lastMileTravelString}|  ${(feeDetails.totalFee)/100} Delivery fee wiil apply`}</li>
-        </ul></li>
-        <hr />
-        <li>{`${sla.slaString}  ${costForTwoMessage}`}</li>
-    </ul>
-  </div>
+ restaurantMenuDetail.length===0?(<h1>Data is loading</h1>):( <div className=" w-1/2 mx-auto">
+  <div className="flex  justify-between mt-16">
+    <div className="space-y-0">
+    <h1 className="font-bold text-2xl">{name}</h1>
+      <span className="block ">{cuisines.join(",")}</span>
+      <span className="block">{`${areaName}, ${sla.lastMileTravelString}`}</span>
+      </div>
+      <div className="mt-8 border border-gray-300 p-4 rounded-lg">
+        <button className="pl-4" onClick={handleAddFavourite}><FaHeart color="red" /></button>
+            <span className="block">{avgRatingString} star</span>
+      <span className="text-sm">{totalRatingsString}</span>
+      </div>
+      </div>
+        <span>{`${sla.lastMileTravelString}|₹ ${(feeDetails.totalFee)/100} Delivery fee wiil apply`}</span>
+        <span className="block py-6">{`${sla.slaString}` }<span className="px-6">  {costForTwoMessage} </span></span>
+    
+  <div className="bg-neutral-100 p-4 ">
   {
   
     cards.map((item)=>(
@@ -55,7 +65,8 @@ const Restaurant_Menu = () => {
  
     ))
   }
-  </>
+  </div>
+  </div>
   )
     )
   }

@@ -6,7 +6,7 @@ import { LOGO_URL } from "../utils/constant";
 
 const Header = () => {
     const cartItem=useSelector(store=>store.cart.items)
-
+  console.log(cartItem)
 return(
   <nav className="navItem  flex justify-around shadow-lg bg-green-100">
   <div className="logo">

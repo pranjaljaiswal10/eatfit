@@ -15,9 +15,15 @@ const cartSlice= createSlice({
         },
         removeItem:(state)=>{
             state.items.pop()
+        },
+        increase:(state)=>{
+            state.items.quantity+=1
+        },
+        decrease:(state)=>{
+            state.items.quantity-=1
         }
     }
 })
 
 export default cartSlice.reducer;
-export const {addItem,removeItem,clearCart}=cartSlice.actions;
+export const {addItem,removeItem,clearCart,increase,decrease}=cartSlice.actions;
