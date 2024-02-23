@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { CART_IMAGE_ID, IMG_CDN_URL } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../utils/cartSlice";
+import { clearCart, decrease, increase, removeItem } from "../utils/cartSlice";
 
 const Cart = () => {
   const dispatch=useDispatch()
@@ -11,9 +11,21 @@ const Cart = () => {
   const handleClearCart=()=>{
     dispatch(clearCart())
   }
+  const handleIncrease=()=>{
+    dispatch(increase())
+  }
+  const handleDecrease=(item)=>{
+    item.quantity===1?dispatch(removeItem()):dispatch(decrease())
+  }
   const handleClick = () => {
     navigate("/");
   };
+  const cartTotal=cartItem.reduce((Total,item)=>{
+    return Total+(item.price/100)*item.quantity
+  },0)
+  const gstCharges=35
+  const totalPayment=Math.ceil(cartTotal+gstCharges)
+
   return cartItem.length === 0 ? (
     <div className="w-1/6 m-auto text-center my-24">
       <img
@@ -37,21 +49,23 @@ const Cart = () => {
       {cartItem.map((item) => (
         <div className="" key={item.id}>
           <h1>{item.dishName}</h1>
+          <button onClick={()=>handleDecrease(item)}>-</button>
           <h2>{item.quantity}</h2>
-          <h3>₹{item.price ? item.price/100 : item.defaultPrice/100}</h3>
+          <button onClick={handleIncrease}>+</button>
+          <h3>₹{Math.ceil((item.price/100)*item.quantity)}</h3>
           <h4>Bill Details</h4>
         </div>
       ))}
           <ul>
             <li>Item Total</li>
-            <li>{}</li>
+            <li>₹{Math.ceil(cartTotal)}</li>
             <li>Delivery Fee</li>
-            <li>{}</li>
+            <li>₹{}</li>
             <li>GST and Restaurant Charges</li>
-            <li>₹35.49</li>
+            <li>₹{gstCharges}</li>
             <hr />
             <li>TO PAY</li>
-            <li>{}</li>
+            <li>₹{totalPayment}</li>
           </ul>
     </>
   );

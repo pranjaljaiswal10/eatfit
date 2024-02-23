@@ -17,11 +17,17 @@ const cartSlice= createSlice({
             state.items.pop()
         },
         increase:(state)=>{
-            state.items.quantity+=1
+            state.items.forEach(item => item.quantity++);
         },
+        
         decrease:(state)=>{
-            state.items.quantity-=1
+            state.items.forEach(item => {
+                if (item.quantity > 0) {
+                    item.quantity--;
+                }
+            });
         }
+        
     }
 })
 

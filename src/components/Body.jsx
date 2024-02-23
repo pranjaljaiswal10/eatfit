@@ -1,42 +1,23 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { SWIGGY_API_URL } from "../utils/constant";
 import { filteredData } from "../utils/helper";
 import Restaurant_Card from "./Restaurant_Card";
 import Shimmer from "./Shimmer";
+import useRestaurantCard from "../utils/Hooks/useRestaurant";
 
 
 
 const Body = () => {
- const [AllRestaurant,setAllRestaurant]=useState([]);
-  const [filteredRestaurant,setFilteredRestaurant]=useState([])
-  const [searchTxt,setSearchTxt]=useState("")
-  
-  async function getData(){
-    const response=await fetch(SWIGGY_API_URL);
-    const json=await response.json();
-    for(let i=0;i<json?.data?.cards.length;i++)
-    {
-      if(json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle")
-    {
-      setAllRestaurant(json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-      setFilteredRestaurant(json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-    }
-    }
-   
-  }
-  useEffect(()=>{
-    getData()
-  },[])
-
+ const [searchTxt,setSearchTxt]=useState("")
+ const [allRestaurant,filteredRestaurant,setFilteredRestaurant]=useRestaurantCard()
 
 
   const handleClick=()=>{
-    setFilteredRestaurant(filteredData(searchTxt,AllRestaurant))
+    setFilteredRestaurant(filteredData(searchTxt,allRestaurant))
   }
-if(!AllRestaurant) return null;
+if(!allRestaurant) return null;
 
-if(AllRestaurant.length===0) return <Shimmer/>
+if(allRestaurant.length===0) return <Shimmer/>
   return (
   
  <div className="body m-8 ">

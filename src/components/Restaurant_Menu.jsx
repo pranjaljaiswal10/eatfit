@@ -1,11 +1,10 @@
-import {  useEffect, useState, } from "react";
 import { useParams } from "react-router-dom";
-import { SWIGGY_ITEM_URL } from "../utils/constant";
 import Item_Category from "./Item_Category";
 import Nested_Item_Category from "./Nested_Item_Category";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../utils/favouriteSlice";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 
 
@@ -14,18 +13,10 @@ import { addItem } from "../utils/favouriteSlice";
 const Restaurant_Menu = () => {
   const dispatch=useDispatch()
   const {resId}=useParams()
-  const [restaurantMenuDetail,setRestaurantMenuDetail]=useState([]);
  const favouriteItem=useSelector(store=>store.favourite.items)
+  const restaurantMenuDetail=useRestaurantMenu(resId)
 
-
-  useEffect(()=>{
-      async function getData(){
-        const response=await fetch(`${SWIGGY_ITEM_URL}${resId}`)
-        const json=await response.json();
-      setRestaurantMenuDetail(json?.data?.cards)
-         }
-         getData()
-    },[resId])
+  
 
 
 
