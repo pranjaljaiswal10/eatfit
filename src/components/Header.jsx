@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LOGO_URL } from "../utils/constant";
 import useOnline from "../utils/Hooks/useOnlineStatus";
+import { useEffect } from "react";
 
 
 
@@ -9,6 +10,9 @@ const Header = () => {
   const isOnline=useOnline();
     const cartItem=useSelector(store=>store.cart.items)
   console.log(cartItem)
+  useEffect(()=>{
+
+  },[])
 return(
   <nav className="navItem  flex justify-around shadow-lg bg-green-100">
   <div className="logo">

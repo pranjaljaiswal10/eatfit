@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { filteredData } from "../utils/helper";
+import {  searchData } from "../utils/helper";
 import Restaurant_Card from "./Restaurant_Card";
 import Shimmer from "./Shimmer";
 import useRestaurantCard from "../utils/Hooks/useRestaurant";
@@ -10,10 +10,13 @@ import useRestaurantCard from "../utils/Hooks/useRestaurant";
 const Body = () => {
  const [searchTxt,setSearchTxt]=useState("")
  const [allRestaurant,filteredRestaurant,setFilteredRestaurant]=useRestaurantCard()
-
+console.log(filteredRestaurant)
 
   const handleClick=()=>{
-    setFilteredRestaurant(filteredData(searchTxt,allRestaurant))
+    setFilteredRestaurant(searchData(searchTxt,allRestaurant))
+  }
+  const handleFilterClick=(e)=>{
+    setFilteredRestaurant(filterData(allRestaurant,e.target.value))
   }
 if(!allRestaurant) return null;
 
@@ -25,7 +28,8 @@ if(allRestaurant.length===0) return <Shimmer/>
   <input type="text" className="mx-8 w-1/6 outline-4 rounded" value={searchTxt} onChange={(e)=>setSearchTxt(e.target.value)}/>
   <button onClick={handleClick} className="bg-lime-300 py-2 px-4 rounded-md">search</button>
   </div>
-  <button className="font-semibold bg-gray-200 p-2 rounded-md">Top Rated Restaurant</button>
+  <button onClick={handleFilterClick} className="font-semibold bg-gray-200 p-3 rounded-md">Top Rated Restaurant</button>
+  <button onClick={handleFilterClick} className="font-semibold bg-gray-200 p-3 rounded-md mx-8">pure Veg</button>
   <div className="flex flex-wrap justify-evenly">
   {
     filteredRestaurant.length===0?(<h1>No match found</h1>):(
