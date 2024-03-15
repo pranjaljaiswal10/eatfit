@@ -21,17 +21,17 @@ const Restaurant_Menu = () => {
 
 
     if(restaurantMenuDetail.length===0) return <h1>Data is loading...</h1>
-  const  {cuisines,name,avgRatingString,areaName,sla,feeDetails,totalRatingsString,costForTwoMessage,cloudinaryImageId,id}=restaurantMenuDetail[2]?.card?.card?.info||{} 
+  const  {cuisines,name,avgRatingString,areaName,sla,feeDetails,totalRatingsString,costForTwoMessage,cloudinaryImageId,id}=restaurantMenuDetail[0]?.card?.card?.info||{} 
   const list={imageId:cloudinaryImageId,name:name,rating:avgRatingString,sla:sla,cuisines:cuisines,areaName:areaName,id}
   const handleAddFavourite=()=>{
     const found=favouriteItem.some(item=>item.name.includes(name))
    if(!found)
     dispatch(addItem(list))
   }
-  const {cards}=restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR || {};
-  
+  const {cards}=restaurantMenuDetail[2]?.groupedCard?.cardGroupMap?.REGULAR || {};
+  console.log(restaurantMenuDetail)
   return ( 
-   
+  
  restaurantMenuDetail.length===0?(<h1>Data is loading</h1>):( <div className=" w-1/2 mx-auto">
   <div className="flex  justify-between mt-16">
     <div className="space-y-0">
