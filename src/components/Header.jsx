@@ -25,7 +25,7 @@ return(
     <li><Link to="/contact">Contact Us</Link></li>
     <li><Link to="/favourite">Favourite</Link></li>
     <li><Link to="/cart">{`Cart -(${cartItem.length} items)`}</Link></li>
-    <li><Link to="/siginup">SignUp</Link></li>
+    <li><Link to="/signup">SignUp</Link></li>
   </ul>
   </nav>
 )

@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { addItem, increase } from "../utils/cartSlice";
 import { ITEM_IMG_CDN_URL } from "../utils/constant"
-import { useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { FaAngleUp } from "react-icons/fa";
+
 
 
 const ItemMenu = ({name,description,imageId,price,defaultPrice,id}) =>{
@@ -14,19 +12,12 @@ const ItemMenu = ({name,description,imageId,price,defaultPrice,id}) =>{
        const dispatch=useDispatch()
    const handleAddItem=()=>{
     const found=cartItems.some((item)=>item.id===id)
-    console.log(found)
     found?dispatch(increase()):dispatch(addItem(item))
    }
 
-   const [isOpen,setIsOpen]=useState(true);
-   const handleButtonClick=()=>{
-     setIsOpen(!isOpen)
- }
+
     return(
-        <>
-       { isOpen?
-        <div className="flex justify-between py-4 px-10 border-b-2 border-slate-400">
-        <button onClick={handleButtonClick}><FaAngleUp/></button>
+       ( <div className="flex justify-between py-4 px-10 border-b-2 border-slate-400">
          <div className="w-9/12">
         <h1 className= "font-medium text-lg">{name}</h1>
          <h2>₹{price?price/100:defaultPrice/100}</h2>
@@ -38,10 +29,7 @@ const ItemMenu = ({name,description,imageId,price,defaultPrice,id}) =>{
        </div>
         {imageId && <img src={`${ITEM_IMG_CDN_URL}${imageId}`} className="w-full rounded" alt={name} />}
         </div>
-        </div>
-        : <button onClick={handleButtonClick}><FaAngleDown/></button>
-       }
-        </>
+        </div>)
     )
 }
 export default ItemMenu;

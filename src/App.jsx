@@ -12,6 +12,7 @@ import Login from './components/Login';
 import { Provider } from 'react-redux';
 import appStore from './utils/appStore';
 import './App.css'
+import Signup from './components/Signup';
 
 
 
@@ -45,7 +46,7 @@ const appRouter=createBrowserRouter([{
       path:"/contact",
       element:<Contact/>
     },{
-      path:"/login",
+      path:"/signin",
       element:<Login/>
     },{
       path:"/cart",
@@ -57,6 +58,9 @@ const appRouter=createBrowserRouter([{
       path:"/restaurant/:resId",
       element:
       <Restaurant_Menu/>
+    },{
+      path:"/signup",
+      element:<Signup/>
     }
   ]
 }])
