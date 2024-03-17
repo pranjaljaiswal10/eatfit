@@ -3,14 +3,6 @@
   margin: 0;
   box-sizing:border-box;
 }
-body{
-  height: 100vh;
-  width: 100vw;
-
-  background-image: url("https://img.freepik.com/free-photo/food-frame-with-asian-dish_23-2148242505.jpg?t=st=1710600173~exp=1710603773~hmac=baa2a3537f51ade6a22ab34d02caeb9f37f061309a097b7caf2cce87aa49a88e&w=1060");
-  background-repeat: no-repeat;
- background-size:cover
-}
 
 input{
   border: 2px solid black;
