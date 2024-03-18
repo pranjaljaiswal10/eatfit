@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import { SWIGGY_ITEM_URL } from "./constant";
+import { SWIGGY_ITEM_URL } from "../constant";
 
 
 const useRestaurantMenu=(resId)=>{

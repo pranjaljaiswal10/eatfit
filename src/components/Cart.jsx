@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-
-import { CART_IMAGE_ID, IMG_CDN_URL } from "../utils/constant";
+import { CART_IMAGE_ID, IMG_CDN_URL, ITEM_IMG_CDN_URL,  } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { clearCart, decrease, increase, removeItem } from "../utils/cartSlice";
+
 
 const Cart = () => {
   const dispatch=useDispatch()
   const cartItem = useSelector((store) => store.cart.items);
+ 
   const navigate = useNavigate();
   const handleClearCart=()=>{
     dispatch(clearCart())
@@ -44,7 +45,8 @@ const Cart = () => {
     </div>
   ) : (
     <>
-      <h1 className="text-2xl font-bold">Cart</h1>
+    
+    
       <button onClick={handleClearCart}>clearCart</button>
       {cartItem.map((item) => (
         <div className="" key={item.id}>
