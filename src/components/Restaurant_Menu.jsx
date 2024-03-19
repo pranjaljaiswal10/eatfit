@@ -5,7 +5,6 @@ import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../utils/favouriteSlice";
 import useRestaurantMenu from "../utils/Hooks/useRestaurantMenu";
-import { ResContext } from "../utils/resContext";
 
 const Restaurant_Menu = () => {
   const dispatch = useDispatch();

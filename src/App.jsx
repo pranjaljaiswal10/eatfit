@@ -12,7 +12,7 @@ import Login from './components/Login';
 import { Provider } from 'react-redux';
 import appStore from './utils/appStore';
 import './App.css'
-import { ResProvider } from './utils/resContext';
+
 
 
 
@@ -20,12 +20,10 @@ import { ResProvider } from './utils/resContext';
 
 const AppLayout=()=>{
   return(
-     <Provider store={appStore}>
-      <ResProvider>
+     <Provider store={appStore}> 
        <Header/>        
       <Outlet/>
       <Footer/>
-      </ResProvider>
      </Provider>
   )
 }
