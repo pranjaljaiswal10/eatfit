@@ -47,7 +47,7 @@ return(
     <li><Link to="/contact">Contact Us</Link></li>
     <li><Link to="/favourite">Favourite</Link></li>
     {user&&<li>{user.name}</li>}
-    {user&&<li onClick={handleSignOut}>SignOut</li>}
+    {user&&<li onClick={handleSignOut} className="cursor-pointer">SignOut</li>}
     <li><Link to="/cart">{`Cart -(${cartItem.length} items)`}</Link></li>
     <li><Link to="/signin">SignIn</Link></li>
   </ul>
