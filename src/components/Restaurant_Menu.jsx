@@ -11,7 +11,7 @@ const Restaurant_Menu = () => {
   const { resId } = useParams();
   const favouriteItem = useSelector((store) => store.favourite.items);
   const restaurantMenuDetail = useRestaurantMenu(resId);
- 
+
   const {
     cuisines,
     name,
@@ -23,7 +23,7 @@ const Restaurant_Menu = () => {
     costForTwoMessage,
     cloudinaryImageId,
     id,
-  } = restaurantMenuDetail[0]?.card?.card?.info || {};
+  } = restaurantMenuDetail[0]?.card?.card?.info||restaurantMenuDetail[2]?.card?.card?.info || {};
   const list = {
     imageId: cloudinaryImageId,
     name: name,
@@ -33,25 +33,24 @@ const Restaurant_Menu = () => {
     areaName: areaName,
     id,
   };
- 
-  
+
   if (restaurantMenuDetail.length === 0) return <h1>Data is loading...</h1>;
-  
- 
+
   const handleAddFavourite = () => {
     const found = favouriteItem.some((item) => item.name.includes(name));
     if (!found) dispatch(addItem(list));
   };
   const { cards } =
-    restaurantMenuDetail[2]?.groupedCard?.cardGroupMap?.REGULAR || {};
+    restaurantMenuDetail[2]?.groupedCard?.cardGroupMap?.REGULAR ||
+    restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR ||
+    {};
   console.log(restaurantMenuDetail);
-
-
 
   return restaurantMenuDetail.length === 0 ? (
     <h1>Data is loading</h1>
   ) : (
     <div className=" w-1/2 mx-auto">
+      <div>
       <div className="flex  justify-between mt-16">
         <div className="space-y-0">
           <h1 className="font-bold text-2xl">{name}</h1>
@@ -73,12 +72,12 @@ const Restaurant_Menu = () => {
         {`${sla.slaString}`}
         <span className="px-6"> {costForTwoMessage} </span>
       </span>
-
+       </div>
       <div className="bg-neutral-100 p-4 ">
         {cards.map((item) =>
           item?.card?.card?.["@type"] ===
           "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ? (
-            <Item_Category {...item?.card?.card}  key={item.card.card.title} />
+            <Item_Category {...item?.card?.card} key={item.card.card.title} />
           ) : (
             item?.card?.card?.["@type"] ===
               "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory" && (

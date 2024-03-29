@@ -8,6 +8,8 @@ export const SWIGGY_API_URL="https://corsproxy.io/?https%3A%2F%2Fwww.swiggy.com%
 
 export const SWIGGY_ITEM_URL="https://corsproxy.io/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Fmenu%2Fpl%3Fpage-type%3DREGULAR_MENU%26complete-menu%3Dtrue%26lat%3D25.4358011%26lng%3D81.846311%26restaurantId="
 
+export const SWIGGY_MOBILE_ITEM_API="https://corsproxy.io/?https%3A%2F%2Fwww.swiggy.com%2Fmapi%2Fmenu%2Fpl%3Fpage-type%3DREGULAR_MENU%26complete-menu%3Dtrue%26lat%3D25.4358011%26lng%3D81.846311%26restaurantId="
+
 export const LOGO_URL= "https://djgt4pi2uqo7n.cloudfront.net/prod/assets/images/eatfit-logo-horizontal.svg"
 
 export const CART_IMAGE_ID="2xempty_cart_yfxml0"

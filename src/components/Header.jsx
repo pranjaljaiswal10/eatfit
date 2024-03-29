@@ -15,7 +15,6 @@ const Header = () => {
   const navigate=useNavigate()
   const dispatch=useDispatch()
     const cartItem=useSelector(store=>store.cart.items)
-  console.log(cartItem)
   const user=useSelector((store)=>store.user)
   const handleSignOut=()=>{
     signOut(auth).then(()=>{
@@ -43,8 +42,6 @@ return(
   <ul className="flex  items-center space-x-4">
     <li>Online Status:{isOnline? "✅" : "🔴"}</li>
     <li><Link to="/">Home</Link></li>
-    <li><Link to="/about">About Us</Link></li>
-    <li><Link to="/contact">Contact Us</Link></li>
     <li><Link to="/favourite">Favourite</Link></li>
     {user&&<li>{user.name}</li>}
     <li><Link to="/cart">{`Cart -(${cartItem.length} items)`}</Link></li>
