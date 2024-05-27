@@ -3,10 +3,11 @@ import { IMG_CDN_URL } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { removeItem } from "../utils/favouriteSlice";
 import { MdDelete } from "react-icons/md";
+import { FaStar } from "react-icons/fa";
 
 const Favourite = () => {
   const favouriteItems = useSelector((store) => store.favourite.items);
-
+ console.log(favouriteItems)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -33,26 +34,20 @@ const Favourite = () => {
       <h1 className="font-bold text-2xl text-center py-8">{`Favourite (${favouriteItems.length})items`}</h1>
       <div className="flex flex-wrap ">
         {favouriteItems.map((item) => (
-          <div
-            className=" w-[250px] m-4 p-4 bg-gray-100 hover:bg-gray-200 rounded-lg relative"
-            key={item.id}
-          >
-            <ul>
-              <li>
-                <img
-                  src={`${IMG_CDN_URL}${item.imageId}`}
-                  alt={name}
-                  className="rounded-lg h-[250px]"
-                />
-              </li>
-              <li className="font-bold py-4 text-lg">{item.name}</li>
-              <li>{item.rating} star</li>
-              <li>{item.sla.slaString}</li>
-              <li className="truncate overflow-hidden">
-                {item.cuisines.join(",")}
-              </li>
-              <li>{item.areaName}</li>
-              <li>
+        <div className=" w-[240px] m-4 p-2 bg-gray-100 hover:bg-gray-200 rounded-lg shadow-xl relative" key={item.id}>
+      <ul>
+        <li>
+          <img
+            src={`${IMG_CDN_URL}${item.imageId}`}
+            alt={name}
+            className="rounded-lg w-full "
+          />
+        </li>
+        <li className="font-GrotBold text-lg font-semibold">{item.name}</li>
+        <li className="flex items-center"><FaStar className="text-white bg-green-900 rounded-full p-0.5 text-lg mr-2"/>{`${item.rating} • ${item?.sla?.slaString}`}</li>    
+        <li className="font-GrotThin text truncate text-sm  text-gray-500">{item.cuisines.join(",")}</li>
+        <li className=" font-GrotThin text-sm text-gray-500">{item.areaName}</li>
+      </ul>
                 <button
                   onClick={handleRemoveItem}
                   className="absolute  bottom-3/4 left-3/4 top-2"
@@ -60,8 +55,7 @@ const Favourite = () => {
                   {" "}
                   <MdDelete size={24} color="gray" />
                 </button>
-              </li>
-            </ul>
+              
           </div>
         ))}
       </div>

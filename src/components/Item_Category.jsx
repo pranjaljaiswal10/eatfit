@@ -11,9 +11,9 @@ const Item_Category=({title,itemCards})=>{
     setIsOpen(!isOpen)
 }
     return(
-      <div className=" py-4 border-b-2 border-slate-400">
-  <div onClick={handleButtonClick} className="flex justify-between cursor-pointer">
-  <h1 className="font-semibold text-lg">{`${title}(${itemCards.length})`} </h1>
+  <div>
+  <div onClick={handleButtonClick} className="flex justify-between items-center cursor-pointer shadow-md py-5 px-2">
+  <h1 className=" font-semibold sm:text-lg">{`${title}(${itemCards.length})`} </h1>
   {isOpen?<FaAngleUp/>:<FaAngleDown/>}
   </div>
    {
@@ -21,7 +21,7 @@ const Item_Category=({title,itemCards})=>{
   isOpen && (<ItemMenu {...item.card.info}  key={item.card.info.id}/>)
     ))
   }
-  </div>
+</div>
     )
 }
 export default Item_Category;

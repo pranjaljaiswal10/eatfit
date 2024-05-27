@@ -7,27 +7,26 @@ const useRestaurantCard = () => {
   async function getData() {
     const response = await fetch(SWIGGY_API_URL);
     const json = await response.json();
-    for (let i = 0; i < json?.data?.cards.length; i++) {
-      if (
-        json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.[
-          "@type"
-        ] ===
-        "type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle"
-      ) {
-        setAllRestaurant(
+    function checkJsonData(jsonData) {
+      for (let i = 0; i < jsonData?.data?.cards.length; i++) {
+        let checkData =
           json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        );
-        setFilteredRestaurant(
-          json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        );
+            ?.restaurants;
+        if (checkData !== undefined) {
+          return checkData;
+        }
       }
     }
+
+  
+    const resData = checkJsonData(json);
+    setAllRestaurant(resData);
+    setFilteredRestaurant(resData)
   }
   useEffect(() => {
     getData();
   }, []);
+  
   return [AllRestaurant, filteredRestaurant, setFilteredRestaurant];
 };
 export default useRestaurantCard;

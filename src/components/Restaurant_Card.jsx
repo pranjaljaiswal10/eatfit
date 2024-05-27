@@ -1,7 +1,8 @@
 import { IMG_CDN_URL } from "../utils/constant";
 import { addItem } from "../utils/favouriteSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
+
 
 const Restaurant_Card = ({
   cloudinaryImageId,
@@ -11,7 +12,6 @@ const Restaurant_Card = ({
   sla,
   areaName,
   id,
-  costForTwo,
 }) => {
   const list = {
     imageId: cloudinaryImageId,
@@ -30,30 +30,26 @@ const Restaurant_Card = ({
     if (!found) dispatch(addItem(list));
   };
   return (
-    <div className=" w-[250px] m-4 p-4 bg-gray-100 hover:bg-gray-200 rounded-lg relative">
+    <div className=" w-[240px] m-4 p-2 bg-gray-100 hover:bg-gray-200 rounded-lg shadow-xl relative">
       <ul>
         <li>
           <img
             src={`${IMG_CDN_URL}${cloudinaryImageId}`}
             alt={name}
-            className="rounded-lg h-[250px] "
+            className="rounded-lg w-full "
           />
         </li>
-        <li className="font-bold py-4 text-lg">{name}</li>
-        <li>{avgRatingString} star</li>
-        <li>{sla.slaString}</li>
-        <li className="truncate overflow-hidden">{cuisines.join(",")}</li>
-        <li>{areaName}</li>
-        <li>{costForTwo.split(" ")[0].slice(1)}</li>
-        <li>
+        <li className="font-GrotBold text-lg font-semibold">{name}</li>
+        <li className="flex items-center"><FaStar className="text-white bg-green-900 rounded-full p-0.5 text-lg mr-2"/>{`${avgRatingString} • ${sla.slaString}`}</li>    
+        <li className="font-GrotThin text truncate text-sm  text-gray-500">{cuisines.join(",")}</li>
+        <li className=" font-GrotThin text-sm text-gray-500">{areaName}</li>
+      </ul>
           <button
             onClick={(e) => handleAddItem(e)}
             className="absolute bottom-3/4 left-3/4 top-2"
           >
             <FaHeart color="red" size={24} />
           </button>
-        </li>
-      </ul>
     </div>
   );
 };

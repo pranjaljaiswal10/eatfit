@@ -10,6 +10,9 @@ import { clearCart, decrease, increase, removeItem } from "../utils/cartSlice";
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItem = useSelector((store) => store.cart.items);
+  const resDetail=useSelector((store)=>store.resDetail)
+ console.log(resDetail)
+
 
   const navigate = useNavigate();
   const handleClearCart = () => {
@@ -47,57 +50,53 @@ const Cart = () => {
       </button>
     </div>
   ) : (
-    <div className="w-1/2 mx-auto my-12">
+    <div className="lg:w-1/2 lg:mx-auto ">
       <div className="my-4 text-center">
         <h1 className="text-2xl font-bold">My Cart</h1>
-        <button
-          onClick={handleClearCart}
-          className="border-2 border-black px-3 py-1/2 my-4 hover:bg-gray-400 rounded"
-        >
-          clearCart
-        </button>
       </div>
       {cartItem.map((item) => (
         <div
-          className="flex justify-evenly items-center space-y-8"
+          className="flex justify-evenly items-center space-y-8 bg-slate-50"
           key={item.id}
         >
           <div className="w-9/12">
-            <span className="font-bold pt-8">{item.name}</span>
-            <div className="flex">
-              <div>
+            <span className="text-base  font-semibold pt-4">{item.name}</span>
+            <span className="block">₹{Math.ceil((item.price / 100) * item.quantity)}</span>
+          </div>
+          <div className="w-3/12 relative">
+            {item.imageId && (
+              <img
+                src={`${ITEM_IMG_CDN_URL}${item.imageId}`}
+                height="144" width="156"
+                className="rounded object-cover"
+                alt={item.name}
+              />
+            )}
+               <div className="flex items-center text-green-600 bg-slate-50 font-bold text-lg rounded-md absolute bottom-2 left-1/4">
                 <button
-                  className="rounded-full px-3 py-1 bg-gray-400"
+                  className=" px-3 py-1 "
                   onClick={() => handleDecrease(item)}
                 >
                   -
                 </button>
-              </div>
               <h2>{item.quantity}</h2>
-              <div>
+            
                 <button
-                  className="rounded-full px-3 py-1 bg-gray-400"
+                  className=" px-3 py-1 "
                   onClick={handleIncrease}
                 >
                   +
                 </button>
-              </div>
             </div>
-            <h3>₹{Math.ceil((item.price / 100) * item.quantity)}</h3>
-          </div>
-          <div className="w-3/12">
-            {item.imageId && (
-              <img
-                src={`${ITEM_IMG_CDN_URL}${item.imageId}`}
-                className="rounded w-32"
-                alt={item.name}
-              />
-            )}
           </div>
         </div>
       ))}
-      <div className="my-12 ">
-        <h4>Bill Details</h4>
+       <div className="space-x-3 flex justify-center items-center">
+        <button className="px-8 py-2 text-white font-semibold bg-lime-500 ">Place Order</button>
+        <button onClick={handleClearCart} className="px-8 py-2 bg-red-500 border border-red-500 text-white font-semibold">Clear All</button>
+       </div>
+      <div className="my-12 flex flex-col ">
+        <strong className="self-center">Bill Details</strong>
         <table>
           <tbody>
             <tr>
