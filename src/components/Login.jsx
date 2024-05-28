@@ -33,7 +33,8 @@ const Login = () => {
       });
   };
   return (
-    <div className="text-center my-24 py-20 border-2 rounded border-gray-500 mx-auto w-1/3 bg-no bg-repeat  bg-image">
+    <div className="h-[530px]">
+    <div className="text-center p-20 mt-28 bg-indigo-500 border-2 rounded border-gray-500 mx-auto w-96">
       <h1 className="my-4 text-2xl font-bold">Welcome Back !</h1>
       <form onSubmit={handleSubmit} className="space-y-4 mb-4">
         <div>
@@ -41,7 +42,7 @@ const Login = () => {
             type="email"
             id="email"
             placeholder="Email-id"
-            className="px-2 py-1 placeholder-gray-600"
+            className="px-3 py-2 rounded w-60 placeholder-gray-600"
             value={form.email}
             onChange={handleChange}
           />
@@ -51,14 +52,14 @@ const Login = () => {
             type="password"
             id="password"
             placeholder="Password"
-            className="px-2 py-1 placeholder-gray-600"
+            className="px-3 py-2 rounded w-60 placeholder-gray-600"
             value={form.password}
             onChange={handleChange}
           />
         </div>
         <button
           type="submit"
-          className="py-1 my-2 rounded-lg border-gray-400 text-white border-2 px-4 bg-blue-700"
+          className="py-1 my-2 rounded-lg border-gray-400  text-white border-2 px-4 bg-blue-700"
         >
           SignIn
         </button>
@@ -68,10 +69,11 @@ const Login = () => {
       )}
       <p>
         Dont have an account?
-        <Link to="/signup" className="text-sky-600">
+        <Link to="/signup" className="text-sky-800 font-bold">
           SignUp
         </Link>
       </p>
+    </div>
     </div>
   );
 };

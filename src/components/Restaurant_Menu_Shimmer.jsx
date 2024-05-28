@@ -1,8 +1,10 @@
 
 
 const RestaurantMenuShimmer = () => {
-  return (<>
-  </>)
+  return (
+  <div className="animation pulse">
+       
+       </div>)
 };
 
 export default RestaurantMenuShimmer;

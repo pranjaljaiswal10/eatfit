@@ -4,26 +4,16 @@
   box-sizing:border-box;
 }
 
-input{
-  border: 2px solid black;
-  border-radius: 7px;
-  width: 50%;
-}
-
-.shimmer-card{
-  width: 282px;
-  height: 522px;
-  background-color: lightgray;
-  margin: 8rem 1rem;
-  padding: 1rem;
-}
-
 .logo {
-  padding: 1.5em;
+  padding:1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
 
+.about{
+  background-image: url('https://thumbs.dreamstime.com/z/salad-tomatoes-greens-dressing-oil-feta-cheese-blue-plate-white-wooden-background-top-view-banner-website-52717635.jpg');
+  
+}
 
 
 

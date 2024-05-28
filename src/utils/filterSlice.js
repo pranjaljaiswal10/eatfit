@@ -9,7 +9,6 @@ const filterSlice = createSlice({
     pureVeg:false,
     offers:false,
     fastDelivery:false,
-    sort: "",
     searchTxt: "",
   },
   reducers: {
@@ -30,9 +29,6 @@ const filterSlice = createSlice({
     },
     toggleFastDelivery:(state)=>{
     state.fastDelivery=!state.fastDelivery
-    },
-    sortBy: (state, action) => {
-      state.sort = action.payload;
     },
     addSearchText: (state, action) => {
       state.searchTxt = action.payload;

@@ -40,14 +40,15 @@ const Signup = () => {
       });
   };
   return (
-    <div className="text-center my-16 py-16 border-2 rounded border-gray-500 mx-auto w-1/3    bg-no bg-repeat  bg-image">
+    <div className="h-[530px]">
+    <div className="text-center p-20 mt-28 bg-indigo-500 border-2 rounded border-gray-500 mx-auto w-[450px]">
       <h1 className="my-6 text-xl font-bold">Create An Account</h1>
       <form onSubmit={handleSubmit} className="space-y-4  mb-4">
         <div>
           <input
             type="email"
             id="email"
-            className="px-2 py-1 placeholder-gray-600 "
+            className="px-3 py-2 rounded w-60 placeholder-gray-600 "
             placeholder="Enter Emailid"
             value={form.email}
             onChange={handleChange}
@@ -57,7 +58,7 @@ const Signup = () => {
           <input
             type="text"
             id="name"
-            className="px-2 py-1 placeholder-gray-600"
+            className="px-3 py-2 rounded w-60 placeholder-gray-600"
             placeholder="Enter Name"
             value={form.name}
             onChange={handleChange}
@@ -67,7 +68,7 @@ const Signup = () => {
           <input
             type="password"
             id="password"
-            className="px-2 py-1 placeholder-gray-600"
+            className="px-3 py-2 rounded w-60 placeholder-gray-600"
             placeholder="Enter Password"
             value={form.password}
             onChange={handleChange}
@@ -83,10 +84,11 @@ const Signup = () => {
       {errorMessage && <p>{errorMessage}</p>}
       <p>
         Already have an account?
-        <Link to="/signin" className="text-sky-600">
+        <Link to="/signin" className="text-sky-800 font-bold">
           SignIn here
         </Link>
       </p>
+    </div>
     </div>
   );
 };

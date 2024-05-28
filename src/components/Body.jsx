@@ -4,10 +4,8 @@ import { searchData } from "../utils/helper";
 import Restaurant_Card from "./Restaurant_Card";
 import useRestaurantCard from "../utils/Hooks/useRestaurant";
 import { useDispatch, useSelector } from "react-redux";
-import { FaSearch } from "react-icons/fa";
 import {
   addSearchText,
-  sortBy,
   toggleBetween,
   toggleFastDelivery,
   toggleLessthan,
@@ -16,14 +14,18 @@ import {
   toggleRating,
 } from "../utils/filterSlice";
 import useFilterData from "../utils/Hooks/useFilterData";
+import { AiOutlineClose } from "react-icons/ai";
+import { IoSearchOutline } from "react-icons/io5";
+import HomePageShimmer from "./HomePageShimmer";
 
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [allRestaurant, filteredRestaurant, setFilteredRestaurant] =
     useRestaurantCard();
-    console.log(allRestaurant)
+  console.log(allRestaurant);
   const dispatch = useDispatch();
-  const sort = useSelector((store) => store.filter.sort);
+  const { rating, lessthan, between, fastDelivery, offers, pureVeg } =
+    useSelector((store) => store.filter);
   const handleSearchClick = () => {
     setFilteredRestaurant(searchData(searchTxt, allRestaurant));
   };
@@ -40,70 +42,81 @@ const Body = () => {
   const handleBetween = () => {
     dispatch(toggleBetween());
   };
-  const handleSort = (e) => {
-    dispatch(sortBy(e.target.value));
+  const handlePureVeg = () => {
+    dispatch(togglePureVeg());
   };
-
-  const handlePureVeg=()=>{
-    dispatch(togglePureVeg())
-  }
-  const handleOffers=()=>{
-    dispatch(toggleOffers())
-  }
-  const handleFastDelivery=()=>{
-    dispatch(toggleFastDelivery())
-  }
-  
+  const handleOffers = () => {
+    dispatch(toggleOffers());
+  };
+  const handleFastDelivery = () => {
+    dispatch(toggleFastDelivery());
+  };
 
   if (!allRestaurant) return null;
 
+  if (allRestaurant.length === 0) return <HomePageShimmer />;
+
   return (
-    <div className="body mx-8 my-24 ">
-      <h1 className="text-xl font-bold">Restaurants with online food delivery in Allahabad</h1>
-      <div className="my-4">
-        <button onClick={handleFastDelivery}>
-          Fast Delivery
-        </button>
-        <button
-          onClick={handleRating}
-          className="font-semibold bg-gray-200 px-3 py-1 hover:bg-gray-400 rounded-md"
-        >
-          Rating 4.0+
-        </button>
-        <button onClick={handlePureVeg}
-          className="font-semibold bg-gray-200 px-3 py-1 hover:bg-gray-400 rounded-md"
-        >
-        Pure Veg
-        </button>
-        <button onClick={handleOffers}>
-          Offers
-        </button>
-        <button
-          onClick={handleLessThan}
-          className="font-semibold bg-gray-200 px-3 py-1 hover:bg-gray-400 rounded-md "
-        >
-          less than ₹300
-        </button>
-        <button
-          onClick={handleBetween}
-          className="font-semibold bg-gray-200 px-3 py-1 hover:bg-gray-400 rounded-md"
-        >
-          ₹300-₹600
-        </button>
-      </div>
-      <div className="search_input">
-        <input
-          type="text"
-          className="mx-8 w-1/6 outline-4 rounded"
-          value={searchTxt}
-          onChange={handleSearchChange}
-        />
-        <button
-          onClick={handleSearchClick}
-          className="bg-lime-300 py-2 px-4 rounded-md"
-        >
-          <FaSearch />
-        </button>
+    <div className="body mx-8 my-28 ">
+      <h1 className="text-xl font-bold ml-10 ">
+        Restaurants with online food delivery in Allahabad
+      </h1>
+      <div className="flex flex-col lg:flex-row items-center justify-between mx-10">
+        <div className="my-6 flex lg:justify-start justify-center flex-wrap md:flex-nowrap gap-4">
+          <button
+            onClick={handleFastDelivery}
+            className="py-2 text-sm flex items-center px-4 tracking-tight shadow border border-gray-400 rounded-full text-gray-700"
+          >
+            Fast Delivery{" "}
+            {fastDelivery && <AiOutlineClose className="inline ml-3" />}
+          </button>
+          <button
+            onClick={handleRating}
+            className="py-2 px-4 text-sm flex items-center tracking-tight shadow border border-gray-400 rounded-full text-gray-700"
+          >
+            Rating 4.0+ {rating && <AiOutlineClose className="inline ml-3" />}
+          </button>
+          <button
+            onClick={handlePureVeg}
+            className="py-2 px-4 text-sm flex items-center tracking-tight shadow border border-gray-400 rounded-full text-gray-700"
+          >
+            Pure Veg {pureVeg && <AiOutlineClose className="inline ml-3" />}
+          </button>
+          <button
+            onClick={handleOffers}
+            className="py-2 px-4 text-sm flex items-center tracking-tight shadow border border-gray-400 rounded-full text-gray-700"
+          >
+            Offers {offers && <AiOutlineClose className="inline ml-3" />}
+          </button>
+          <button
+            onClick={handleLessThan}
+            className="py-2 px-4 text-sm flex items-center tracking-tight shadow border border-gray-400 rounded-full text-gray-700 "
+          >
+            less than ₹300{" "}
+            {lessthan && <AiOutlineClose className="inline ml-3" />}
+          </button>
+          <button
+            onClick={handleBetween}
+            className="py-2 px-4 text-sm flex items-center tracking-tight shadow border border-gray-400 rounded-full text-gray-700"
+          >
+            ₹300-₹600 {between && <AiOutlineClose className="inline ml-3" />}
+          </button>
+        </div>
+        <form className="w-96 border border-gray-100 relative">
+          <input
+            type="text"
+            className="bg-gray-100 w-full py-2 px-3 text-lg  rounded"
+            placeholder="Search restaurant you want...."
+            value={searchTxt}
+            onChange={handleSearchChange}
+          />
+          <button
+            onClick={handleSearchClick}
+            className="absolute right-2 top-4 text-lg"
+          >
+            <IoSearchOutline />
+          </button>
+        </form>
       </div>
       <div className="flex flex-wrap justify-evenly">
         {filteredRestaurant.length === 0 ? (

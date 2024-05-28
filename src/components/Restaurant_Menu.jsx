@@ -9,6 +9,7 @@ import {
   NESTED_MENU_ITEM_TYPE_KEY,
   NORMAL_MENU_ITEM_TYPE_KEY,
 } from "../utils/constant";
+import RestaurantMenuShimmer from "./Restaurant_Menu_Shimmer";
 
 
 const Restaurant_Menu = () => {
@@ -59,7 +60,7 @@ const Restaurant_Menu = () => {
     {};
 
   return restaurantMenuDetail.length === 0 ? (
-    <h1>Data is loading</h1>
+   <RestaurantMenuShimmer/>
   ) : (
     <div className=" lg:w-1/2 lg:mx-auto">
       <div className="mt-24">

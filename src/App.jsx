@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error from "./components/Error";
 import About from "./components/About";
-import Contact from "./components/Contact";
 import Cart from "./components/Cart";
 import Favourite from "./components/Favourite";
 import Restaurant_Menu from "./components/Restaurant_Menu";
@@ -38,14 +37,6 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
-      },
-      {
-        path: "/contact",
-        element: (
-          <PrivateRoute>
-            <Contact />
-          </PrivateRoute>
-        ),
       },
       {
         path: "/signin",
