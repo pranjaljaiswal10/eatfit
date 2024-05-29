@@ -52,7 +52,7 @@ const Header = () => {
         <li>
           <NavLink
             to="/"
-            className={({ isActive }) => (isActive ? "text-amber-500" : "")}
+            className={({ isActive }) => (isActive ? "text-amber-500" : "hover:text-yellow-400")}
           >
             Home
           </NavLink>
@@ -60,7 +60,7 @@ const Header = () => {
         <li>
           <NavLink
             to="/about"
-            className={({ isActive }) => (isActive ? "text-amber-500" : "")}
+            className={({ isActive }) => (isActive ? "text-amber-500" : "hover:text-yellow-400")}
           >
           About
           </NavLink>
@@ -68,7 +68,7 @@ const Header = () => {
        {user&& <li>
           <NavLink
             to="/favourite"
-            className={({ isActive }) => (isActive ? "text-amber-500" : "")}
+            className={({ isActive }) => (isActive ? "text-amber-500" : "hover:text-yellow-400")}
           >
             Favourites
           </NavLink> 
@@ -77,7 +77,7 @@ const Header = () => {
         <li >
           <NavLink
             to="/cart"
-            className={({ isActive }) => (isActive ? "text-amber-500" : "")}
+            className={({ isActive }) => (isActive ? "text-amber-500" : "hover:text-yellow-400")}
           ><FaShoppingCart className="inline"/> {`-(${cartItem.length} items)`}</NavLink>
         </li>
         {user ? (
@@ -88,7 +88,7 @@ const Header = () => {
           <li>
             <NavLink
               to="/signin"
-              className={({ isActive }) => (isActive ? "text-amber-500" : "")}
+              className={({ isActive }) => (isActive ? "text-amber-500" : "hover:text-yellow-400")}
             >
              <HiOutlineUser className="inline" /> SignIn
             </NavLink>

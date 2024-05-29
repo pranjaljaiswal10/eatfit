@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { searchData } from "../utils/helper";
 import Restaurant_Card from "./Restaurant_Card";
 import useRestaurantCard from "../utils/Hooks/useRestaurant";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,18 +17,15 @@ import { IoSearchOutline } from "react-icons/io5";
 import HomePageShimmer from "./HomePageShimmer";
 
 const Body = () => {
-  const [searchTxt, setSearchTxt] = useState("");
-  const [allRestaurant, filteredRestaurant, setFilteredRestaurant] =
+  const allRestaurant =
     useRestaurantCard();
-  console.log(allRestaurant);
   const dispatch = useDispatch();
-  const { rating, lessthan, between, fastDelivery, offers, pureVeg } =
-    useSelector((store) => store.filter);
-  const handleSearchClick = () => {
-    setFilteredRestaurant(searchData(searchTxt, allRestaurant));
-  };
+  const { rating, lessthan, between, fastDelivery, offers, pureVeg,searchTxt } =
+  useSelector((store) => store.filter);
+  const restaurant=useFilterData(allRestaurant)
+
+
   const handleSearchChange = (e) => {
-    setSearchTxt(e.target.value);
     dispatch(addSearchText(e.target.value));
   };
   const handleRating = () => {
@@ -52,15 +47,17 @@ const Body = () => {
     dispatch(toggleFastDelivery());
   };
 
+
+
   if (!allRestaurant) return null;
 
   if (allRestaurant.length === 0) return <HomePageShimmer />;
 
   return (
     <div className="body mx-8 my-28 ">
-      <h1 className="text-xl font-bold ml-10 ">
+      <p className="text-xl font-bold ml-10 mr-10 lg:mr-0 text-center lg:text-start">
         Restaurants with online food delivery in Allahabad
-      </h1>
+      </p>
       <div className="flex flex-col lg:flex-row items-center justify-between mx-10">
         <div className="my-6 flex lg:justify-start justify-center flex-wrap md:flex-nowrap gap-4">
           <button
@@ -111,18 +108,17 @@ const Body = () => {
             onChange={handleSearchChange}
           />
           <button
-            onClick={handleSearchClick}
             className="absolute right-2 top-4 text-lg"
           >
             <IoSearchOutline />
           </button>
         </form>
       </div>
-      <div className="flex flex-wrap justify-evenly">
-        {filteredRestaurant.length === 0 ? (
-          <h1>No match found</h1>
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 justify-items-center">
+        {restaurant.length === 0 ? (
+          <h1 className="lg:mt-28 mt-16 text-3xl font-bold lg:text-start text-center">No match found</h1>
         ) : (
-          filteredRestaurant.map((item) => (
+          restaurant.map((item) => (
             <Link to={`/restaurant/${item.info.id}`} key={item.info.id}>
               <Restaurant_Card {...item.info} />
             </Link>

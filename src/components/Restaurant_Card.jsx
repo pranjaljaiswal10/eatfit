@@ -3,7 +3,6 @@ import { addItem } from "../utils/favouriteSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { FaHeart, FaStar } from "react-icons/fa";
 
-
 const Restaurant_Card = ({
   cloudinaryImageId,
   name,
@@ -40,16 +39,21 @@ const Restaurant_Card = ({
           />
         </li>
         <li className="font-GrotBold text-lg truncate font-semibold">{name}</li>
-        <li className="flex items-center"><FaStar className="text-white bg-green-900 rounded-full p-0.5 text-lg mr-2"/>{`${avgRatingString} • ${sla.slaString}`}</li>    
-        <li className="font-GrotThin text truncate text-sm  text-gray-500">{cuisines.join(",")}</li>
+        <li className="flex items-center">
+          <FaStar className="text-white bg-green-900 rounded-full p-0.5 text-lg mr-2" />
+          {`${avgRatingString} • ${sla.slaString}`}
+        </li>
+        <li className="font-GrotThin text truncate text-sm  text-gray-500">
+          {cuisines.join(",")}
+        </li>
         <li className=" font-GrotThin text-sm text-gray-500">{areaName}</li>
       </ul>
-          <button
-            onClick={(e) => handleAddItem(e)}
-            className="absolute text-red-600 text-xl bottom-3/4 left-3/4 top-2"
-          >
-            <FaHeart />
-          </button>
+      <button
+        onClick={(e) => handleAddItem(e)}
+        className="absolute text-red-600 text-xl bottom-3/4 left-3/4 top-2"
+      >
+        <FaHeart />
+      </button>
     </div>
   );
 };

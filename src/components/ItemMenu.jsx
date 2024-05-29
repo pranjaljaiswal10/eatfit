@@ -25,7 +25,7 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
         <h2 className="text-sm font-ProximaNovaMed">
           ₹{price ? price / 100 : defaultPrice / 100}
         </h2>
-        <p className="text-gray-500 py-4 pr-2 text-sm font-ProximaNovaThin">
+        <p className="text-gray-500 py-4 pr-4 text-sm font-ProximaNovaThin">
           {description}
         </p>
       </div>

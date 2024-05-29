@@ -1,20 +1,51 @@
 import { useSelector } from "react-redux";
-import { searchData } from "../helper";
 
 const useFilterData = (allRestaurant) => {
+
+  const {
+    rating,
+    lessthan,
+    between,
+    sort,
+    searchTxt,
+    fastDelivery,
+    offers,
+    pureVeg,
+  } = useSelector((store) => store.filter);
+
+  if(!allRestaurant) return
+
   let filteredRestaurant = [...allRestaurant];
-  const { rating, lessthan, between, sort, searchtxt,fastDelivery,offers,pureVeg } = useSelector(
-    (store) => store.filter
-  );
 
   const topRatedRestaurant = rating
-    ? filteredRestaurant.filter((item) => item?.info?.avgRatingString >= "4.3")
+    ? filteredRestaurant.filter((item) => item?.info?.avgRatingString >= "4.0")
     : filteredRestaurant;
-  const lessthanCost = lessthan
+
+  const fastDeliveryRestaurant = fastDelivery
     ? topRatedRestaurant.filter(
-        (item) => item.info.costForTwo.split(" ")[0] < "₹300"
+        (item) =>
+          item?.info?.sla?.deliveryTime >= 30 &&
+          item?.info?.sla.deliveryTime <= 50
       )
     : topRatedRestaurant;
+  const pureVegRestaurant = pureVeg
+    ? fastDeliveryRestaurant.filter(
+        (item) => item?.info?.badges?.imageBadges?.["0"]?.description === "pureveg"
+      )
+    : fastDeliveryRestaurant;
+  const offersRestaurant = offers
+    ? pureVegRestaurant.filter(
+        (item) =>
+          item?.info?.aggregatedDiscountInfoV3?.header ||
+          item?.info?.aggregatedDiscountInfoV3?.subHeader
+      )
+    : pureVegRestaurant;
+  const lessthanCost = lessthan
+    ? offersRestaurant.filter(
+        (item) => item.info.costForTwo.split(" ")[0] < "₹300"
+      )
+    : offersRestaurant;
+
   const betweenCost = between
     ? lessthanCost.filter(
         (item) =>
@@ -22,6 +53,7 @@ const useFilterData = (allRestaurant) => {
           item?.info?.costForTwo.split(" ")[0] < "₹600"
       )
     : lessthanCost;
+
   const lowToHigh =
     sort === "lowtohigh"
       ? betweenCost.sort((a, b) => {
@@ -38,10 +70,13 @@ const useFilterData = (allRestaurant) => {
           return Number(right) - Number(left);
         })
       : lowToHigh;
-  const searchRestaurant = searchtxt
-    ? lowToHigh
-    : searchData(searchtxt, highToLow);
 
+  const searchRestaurant = searchTxt
+    ? highToLow.filter((item) =>
+        item?.info?.name.toLowerCase().includes(searchTxt.trim().toLowerCase())
+      )
+    : highToLow;
+   
   return searchRestaurant;
 };
 

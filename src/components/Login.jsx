@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
+import { checkValidData } from "../utils/validation";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -13,7 +14,9 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const valid=checkValidData(form.email,form.password)
+    setErrorMessage(valid)
+  if(valid) return
     signInWithEmailAndPassword(auth, form.email, form.password)
       .then((userCredential) => {
         // Signed in
@@ -47,6 +50,7 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
+        {errorMessage && <p>{errorMessage.email}</p>}
         <div>
           <input
             type="password"

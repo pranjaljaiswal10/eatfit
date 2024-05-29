@@ -46,10 +46,6 @@ const Restaurant_Menu = () => {
     id,
   };
 
- 
-
-  if (restaurantMenuDetail.length === 0) return <h1>Data is loading...</h1>;
-
   const handleAddFavourite = () => {
     const found = favouriteItem.some((item) => item.name.includes(name));
     if (!found) dispatch(addItem(list));
@@ -71,7 +67,7 @@ const Restaurant_Menu = () => {
             <span className="block ">{cuisines.join(",")}</span>
             <span className="block">{`${areaName}, ${sla.lastMileTravelString}`}</span>
           </div>
-          <div className=" border border-gray-300 p-4 rounded-lg">
+          <div className=" border-2 border-gray-400 p-4 rounded-lg">
             <button className="pl-4" onClick={handleAddFavourite}>
               <FaHeart color="red" />
             </button>
