@@ -1,18 +1,23 @@
 import Header from "./components/Header";
-import Body from "./components/Body";
 import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error from "./components/Error";
-import About from "./components/About";
 import Cart from "./components/Cart";
 import Favourite from "./components/Favourite";
-import Restaurant_Menu from "./components/Restaurant_Menu";
-import Login from "./components/Login";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import "./App.css";
 import Signup from "./components/Signup";
 import PrivateRoute from "./components/PrivateRoute";
+import { lazy, Suspense } from "react";
+import HomePageShimmer from "./components/HomePageShimmer";
+import RestaurantMenuShimmer from "./components/Restaurant_Menu_Shimmer";
+
+const Body=lazy(()=>import("./components/Body"))
+const Restaurant_Menu=lazy(()=>import("./components/Restaurant_Menu"))
+const Login=lazy(()=>import("./components/Login"))
+const About=lazy(()=>import("./components/About"))
+
 
 const AppLayout = () => {
   return (
@@ -32,15 +37,27 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element:(
+          <Suspense fallback={<HomePageShimmer/>}>
+          <Body/>
+          </Suspense>
+        ),
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<div>Data is Loading...</div>}>
+          <About/>
+          </Suspense>
+        ),
       },
       {
         path: "/signin",
-        element: <Login />,
+        element: (
+        <Suspense fallback={<div>Data is Loading...</div>}>
+          <Login/>
+        </Suspense>
+        ),
       },
       {
         path: "/cart",
@@ -60,7 +77,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/restaurant/:resId",
-        element: <Restaurant_Menu />,
+        element: (
+          <Suspense fallback={<RestaurantMenuShimmer/>}>
+          <Restaurant_Menu/>
+          </Suspense>
+        )
       },
       {
         path: "/signup",

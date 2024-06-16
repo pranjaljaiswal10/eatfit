@@ -16,8 +16,6 @@ const Restaurant_Menu = () => {
   const dispatch = useDispatch();
   const { resId } = useParams();
   const favouriteItem = useSelector((store) => store.favourite.items);
-  const cartItem = useSelector((store) => store.cart.items);
-  console.log(cartItem);
   const restaurantMenuDetail = useRestaurantMenu(resId);
 
   const {
@@ -45,7 +43,7 @@ const Restaurant_Menu = () => {
     areaName: areaName,
     id,
   };
-
+  console.log(restaurantMenuDetail)
   const handleAddFavourite = () => {
     const found = favouriteItem.some((item) => item.name.includes(name));
     if (!found) dispatch(addItem(list));

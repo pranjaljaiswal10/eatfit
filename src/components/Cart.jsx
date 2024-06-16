@@ -8,12 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { clearCart, decrease, increase, removeItem } from "../utils/cartSlice";
 
 const Cart = () => {
+  
   const dispatch = useDispatch();
   const cartItem = useSelector((store) => store.cart.items);
-  const resDetail=useSelector((store)=>store.resDetail)
- console.log(resDetail)
-
-
   const navigate = useNavigate();
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -32,7 +29,14 @@ const Cart = () => {
   }, 0);
   const gstCharges = 35;
   const totalPayment = Math.ceil(cartTotal + gstCharges);
+  
 
+
+ 
+
+
+
+  
   return cartItem.length === 0 ? (
     <div className="w-1/6 m-auto text-center my-24">
       <img
@@ -92,7 +96,7 @@ const Cart = () => {
         </div>
       ))}
        <div className="space-x-3 flex justify-center items-center">
-        <button className="px-8 py-2 text-white font-semibold bg-lime-500 ">Place Order</button>
+        <button  className="px-8 py-2 text-white font-semibold bg-lime-500 ">Place Order</button>
         <button onClick={handleClearCart} className="px-8 py-2 bg-red-500 border border-red-500 text-white font-semibold">Clear All</button>
        </div>
       <div className="my-12 flex flex-col ">

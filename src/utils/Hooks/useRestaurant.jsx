@@ -6,7 +6,6 @@ const useRestaurantCard = () => {
   async function getData() {
     const response = await fetch(SWIGGY_API_URL);
     const json = await response.json();
-    console.log(json)
     function checkJsonData(jsonData) {
       for (let i = 0; i < jsonData?.data?.cards.length; i++) {
         let checkData =

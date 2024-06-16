@@ -43,6 +43,7 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
           >
             ADD
           </button>
+
       </div>
     </div>
   );
