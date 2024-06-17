@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, increase } from "../utils/cartSlice";
+import {
+  addItem,
+  decreaseQuantity,
+  increaseQuantity,
+  removeItem,
+} from "../utils/cartSlice";
 import { ITEM_IMG_CDN_URL } from "../utils/constant";
 
 const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
@@ -11,11 +16,19 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
   };
   imageId && (item.imageId = imageId);
   const cartItems = useSelector((store) => store.cart.items);
-
   const dispatch = useDispatch();
+  const foundItems = cartItems.find((item) => item.id === id);
   const handleAddItem = () => {
-    const found = cartItems.some((item) => item.id === id);
-    found ? dispatch(increase()) : dispatch(addItem(item));
+    dispatch(addItem(item));
+  };
+
+  const handleIncreaseQuantity = () => {
+    dispatch(increaseQuantity());
+  };
+  const handleDecreaseQuantity = () => {
+    foundItems.quantity > 1
+      ? dispatch(decreaseQuantity())
+      : dispatch(removeItem());
   };
 
   return (
@@ -30,22 +43,44 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
         </p>
       </div>
       <div className=" w-3/12  relative ">
-          {imageId && (
-            <img height="144" width="156"
-              src={`${ITEM_IMG_CDN_URL}${imageId}`}
-              className="rounded object-cover "
-              alt={name}
-            />
-          )}
+        {imageId && (
+          <img
+            height="144"
+            width="156"
+            src={`${ITEM_IMG_CDN_URL}${imageId}`}
+            className="rounded object-cover "
+            alt={name}
+          />
+        )}
+        {foundItems === undefined ? (
           <button
-          className="absolute bottom-4 left-1/4 font-bold text-green-600 px-3 py-1 rounded-md bg-slate-50"
+            className="absolute bottom-4 left-1/4 font-bold text-green-600 px-3 py-1 rounded-md bg-slate-50"
             onClick={handleAddItem}
           >
             ADD
           </button>
-
+        ) : (
+          <>
+            <button
+              className="absolute bottom-4 left-10 font-bold text-green-600 bg-slate-200 px-3 py-1 "
+              onClick={handleDecreaseQuantity}
+            >
+              -
+            </button>
+            <span className="absolute bottom-4 left-16 font-bold text-green-600 bg-slate-200 px-2 py-1">
+              {foundItems.quantity}
+            </span>
+            <button
+              className="absolute bottom-4 left-20 font-bold text-green-600 bg-slate-200 px-3 py-1"
+              onClick={handleIncreaseQuantity}
+            >
+              +
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
 };
+
 export default ItemMenu;

@@ -7,7 +7,6 @@ import { FaStar } from "react-icons/fa";
 
 const Favourite = () => {
   const favouriteItems = useSelector((store) => store.favourite.items);
- console.log(favouriteItems)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleNavigate = () => {

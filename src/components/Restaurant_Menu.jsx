@@ -43,7 +43,6 @@ const Restaurant_Menu = () => {
     areaName: areaName,
     id,
   };
-  console.log(restaurantMenuDetail)
   const handleAddFavourite = () => {
     const found = favouriteItem.some((item) => item.name.includes(name));
     if (!found) dispatch(addItem(list));

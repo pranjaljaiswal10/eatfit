@@ -2,22 +2,21 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error from "./components/Error";
-import Cart from "./components/Cart";
-import Favourite from "./components/Favourite";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import "./App.css";
-import Signup from "./components/Signup";
 import PrivateRoute from "./components/PrivateRoute";
 import { lazy, Suspense } from "react";
 import HomePageShimmer from "./components/HomePageShimmer";
 import RestaurantMenuShimmer from "./components/Restaurant_Menu_Shimmer";
+import "./App.css";
 
 const Body=lazy(()=>import("./components/Body"))
 const Restaurant_Menu=lazy(()=>import("./components/Restaurant_Menu"))
 const Login=lazy(()=>import("./components/Login"))
 const About=lazy(()=>import("./components/About"))
-
+const Cart=lazy(()=>import("./components/Cart"))
+const Favourite=lazy(()=>import("./components/Favourite"))
+const Signup=lazy(()=>import("./components/Signup"))
 
 const AppLayout = () => {
   return (
@@ -62,17 +61,21 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: (
+          <Suspense fallback={<div>Data is Loading...</div>}>
           <PrivateRoute>
             <Cart />
           </PrivateRoute>
+          </Suspense>
         ),
       },
       {
         path: "/favourite",
         element: (
+          <Suspense fallback={<div>Data is Loading...</div>}>
           <PrivateRoute>
             <Favourite />
           </PrivateRoute>
+          </Suspense>
         ),
       },
       {
@@ -85,7 +88,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: (
+       <Suspense fallback={<div>Data is Loading...</div>}>
+         <Signup />
+       </Suspense>  
+      ),
       },
     ],
   },
