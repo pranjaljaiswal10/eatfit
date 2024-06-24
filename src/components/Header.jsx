@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import { NavLink, useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGO_URL } from "../utils/constant";
 import useOnline from "../utils/Hooks/useOnlineStatus";
@@ -13,6 +13,7 @@ import { HiOutlineUser } from "react-icons/hi";
 
 const Header = () => {
   const isOnline = useOnline();
+  const {pathname}=useLocation()
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -100,18 +101,18 @@ const Header = () => {
           </NavLink>
         </li>
         {user ? (
-          <li onClick={handleSignOut} className="cursor-pointer">
+          <li onClick={handleSignOut} className="cursor-pointer hover:text-red-700">
             SignOut
           </li>
         ) : (
           <li>
             <NavLink
-              to="/signin"
+              to="/SignIn"
               className={({ isActive }) =>
                 isActive ? "text-amber-500" : "hover:text-yellow-400"
               }
             >
-              <HiOutlineUser className="inline" /> SignIn
+              <HiOutlineUser className="inline" /> {pathname.slice(1)==("SignIn"||"SignUp")?pathname.slice(1):"SignUp"}
             </NavLink>
           </li>
         )}
@@ -171,18 +172,18 @@ const Header = () => {
               </NavLink>
             </li>
             {user ? (
-              <li onClick={handleSignOut} className="cursor-pointer">
+              <li onClick={handleSignOut} className="cursor-pointer hover:text-red-700">
                 SignOut
               </li>
             ) : (
               <li>
                 <NavLink
-                  to="/signin"
+                  to="/SignIn"
                   className={({ isActive }) =>
                     isActive ? "text-amber-500" : ""
                   }
                 >
-                  <HiOutlineUser className="inline" /> SignIn
+                  <HiOutlineUser className="inline" /> {pathname.slice(1)==="SignIn"?"SignIn":"SignUp"}
                 </NavLink>
               </li>
             )}

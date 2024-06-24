@@ -9,14 +9,16 @@ import { lazy, Suspense } from "react";
 import HomePageShimmer from "./components/HomePageShimmer";
 import RestaurantMenuShimmer from "./components/Restaurant_Menu_Shimmer";
 import "./App.css";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 const Body=lazy(()=>import("./components/Body"))
 const Restaurant_Menu=lazy(()=>import("./components/Restaurant_Menu"))
-const Login=lazy(()=>import("./components/Login"))
+// const Login=lazy(()=>import("./components/Login"))
+// const Signup=lazy(()=>import("./components/Signup"))
 const About=lazy(()=>import("./components/About"))
 const Cart=lazy(()=>import("./components/Cart"))
 const Favourite=lazy(()=>import("./components/Favourite"))
-const Signup=lazy(()=>import("./components/Signup"))
 
 const AppLayout = () => {
   return (
@@ -51,11 +53,11 @@ const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: "/signin",
+        path: "/SignIn",
         element: (
-        <Suspense fallback={<div>Data is Loading...</div>}>
           <Login/>
-        </Suspense>
+        // <Suspense fallback={<div>Data is Loading...</div>}>
+        // </Suspense>
         ),
       },
       {
@@ -87,11 +89,11 @@ const appRouter = createBrowserRouter([
         )
       },
       {
-        path: "/signup",
+        path: "/SignUp",
         element: (
-       <Suspense fallback={<div>Data is Loading...</div>}>
          <Signup />
-       </Suspense>  
+      //  <Suspense fallback={<div>Data is Loading...</div>}>
+      //  </Suspense>  
       ),
       },
     ],

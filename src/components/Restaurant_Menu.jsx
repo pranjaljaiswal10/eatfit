@@ -52,9 +52,9 @@ const Restaurant_Menu = () => {
     restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR ||
     {};
 
-  return restaurantMenuDetail.length === 0 ? (
-   <RestaurantMenuShimmer/>
-  ) : (
+
+  return  restaurantMenuDetail.length===0?( <RestaurantMenuShimmer/>)
+  : (
     <div className=" lg:w-1/2 lg:mx-auto">
       <div className="mt-24">
         <p className="my-4 text-sm text-gray-400 font-semibold">{`Home > Allahabad > ${name}`}</p>

@@ -5,8 +5,7 @@ const Error = () => {
     console.error(error)
   return(
     <div>
-        <h1>Oop!Something went wrong,see console in devtool</h1>
-        
+        <p>{"There's nothing here: 404!"}</p>   
     </div>
   )
 };

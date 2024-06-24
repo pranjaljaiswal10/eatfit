@@ -3,6 +3,7 @@ import {
   CART_IMAGE_ID,
   IMG_CDN_URL,
   ITEM_IMG_CDN_URL,
+  LOGO_URL,
 } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import {
@@ -42,14 +43,16 @@ const Cart = () => {
   const handlePayment = useCallback(() => {
     const options = {
       key: import.meta.env.VITE_RAZORPAY_API_KEY,
-      amount: totalPayment,
+      amount: totalPayment*100,
       currency: "INR",
       name: "Eatfit",
       description: "Payment for the Meal",
-      image: "",
+      image: LOGO_URL,
       order_id: orderidGen(),
       handler: (res) => {
-        console.log(res);
+        if (res) {
+          dispatch(clearCart())
+        }
       },
       prefill: {
         name: user?.name,

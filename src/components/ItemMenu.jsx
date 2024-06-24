@@ -42,19 +42,18 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
           {description}
         </p>
       </div>
-      <div className=" w-3/12  relative ">
+      <div className=" w-[118px] h-24 relative ">
         {imageId && (
           <img
-            height="144"
-            width="156"
+          
             src={`${ITEM_IMG_CDN_URL}${imageId}`}
-            className="rounded object-cover "
+            className="rounded-md object-cover w-[118px]"
             alt={name}
           />
         )}
         {foundItems === undefined ? (
           <button
-            className="absolute bottom-4 left-1/4 font-bold text-green-600 px-3 py-1 rounded-md bg-slate-50"
+            className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-[1] w-24 h-9 shadow-md shadow-color-7 bg-white text-center inline-block rounded text-[#60b246] text-sm font-ProximaNovaSemiBold uppercase"
             onClick={handleAddItem}
           >
             ADD
@@ -62,16 +61,16 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
         ) : (
           <>
             <button
-              className="absolute bottom-4 left-10 font-bold text-green-600 bg-slate-200 px-3 py-1 "
+              className="absolute -bottom-2 left-10 font-bold text-green-600 bg-slate-200 px-3 py-1 "
               onClick={handleDecreaseQuantity}
             >
               -
             </button>
-            <span className="absolute bottom-4 left-16 font-bold text-green-600 bg-slate-200 px-2 py-1">
+            <span className="absolute -bottom-2 left-16 font-bold text-green-600 bg-slate-200 px-2 py-1">
               {foundItems.quantity}
             </span>
             <button
-              className="absolute bottom-4 left-20 font-bold text-green-600 bg-slate-200 px-3 py-1"
+              className="absolute -bottom-2 left-20 font-bold text-green-600 bg-slate-200 px-3 py-1"
               onClick={handleIncreaseQuantity}
             >
               +
