@@ -38,16 +38,16 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
         <h2 className="text-sm font-ProximaNovaMed">
           ₹{price ? price / 100 : defaultPrice / 100}
         </h2>
-        <p className="text-gray-500 py-4 pr-4 text-sm font-ProximaNovaThin">
+        <p className="text-gray-500 py-4 pr-4 text-sm line-clamp-2 md:line-clamp-none font-ProximaNovaThin">
           {description}
         </p>
       </div>
-      <div className=" w-[118px] h-24 relative ">
+      <div className="w-[118px] h-24  relative ">
         {imageId && (
           <img
           
             src={`${ITEM_IMG_CDN_URL}${imageId}`}
-            className="rounded-md object-cover w-[118px]"
+            className="rounded-md object-cover md:object-none w-[118px] h-full"
             alt={name}
           />
         )}

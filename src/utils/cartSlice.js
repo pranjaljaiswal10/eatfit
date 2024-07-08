@@ -15,18 +15,19 @@ const cartSlice = createSlice({
     removeItem: (state) => {
       state.items.pop();
     },
-    increaseQuantity: (state) => {
-      state.items.forEach((item) => item.quantity++);
+    increaseQuantity: (state, action) => {
+      const item = state.items.find((item) => item.id === action.payload);
+      if (item) {
+    item.quantity++;
+      }
     },
-
-    decreaseQuantity: (state) => {
-      state.items.forEach((item) => {
-        if (item.quantity > 0) {
-          item.quantity--;
-        }
-      });
-    },
+    decreaseQuantity: (state, action) => {
+      const item = state.items.find((item) => item.id === action.payload);
+      if (item && item.quantity > 1) {
+     item.quantity--;
+      }
   },
+}
 });
 
 export default cartSlice.reducer;

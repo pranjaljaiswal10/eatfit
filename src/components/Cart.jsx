@@ -3,7 +3,7 @@ import {
   CART_IMAGE_ID,
   IMG_CDN_URL,
   ITEM_IMG_CDN_URL,
-  LOGO_URL,
+  
 } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,23 +12,21 @@ import {
   increaseQuantity,
   removeItem,
 } from "../utils/cartSlice";
-import { orderidGen } from "../utils/helper";
-import useRazorpay from "react-razorpay";
-import { useCallback } from "react";
+
 
 const Cart = () => {
-  const user = useSelector((store) => store.user);
   const cartItem = useSelector((store) => store.cart.items);
+  console.log(cartItem)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClearCart = () => {
     dispatch(clearCart());
   };
-  const handleIncrease = () => {
-    dispatch(increaseQuantity());
+  const handleIncrease = (item) => {
+    dispatch(increaseQuantity(item));
   };
   const handleDecrease = (item) => {
-    item.quantity > 1 ? dispatch(decreaseQuantity()):dispatch(removeItem());
+    item.quantity > 1 ? dispatch(decreaseQuantity(item.id)):dispatch(removeItem());
   };
   const handleClick = () => {
     navigate("/");
@@ -39,40 +37,14 @@ const Cart = () => {
   const gstCharges = 35;
   const totalPayment = Math.ceil(cartTotal + gstCharges);
 
-  const [Razorpay] = useRazorpay();
-  const handlePayment = useCallback(() => {
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_API_KEY,
-      amount: totalPayment*100,
-      currency: "INR",
-      name: "Eatfit",
-      description: "Payment for the Meal",
-      image: LOGO_URL,
-      order_id: orderidGen(),
-      handler: (res) => {
-        if (res) {
-          dispatch(clearCart())
-        }
-      },
-      prefill: {
-        name: user?.name,
-        email: user?.email,
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-
-    const rzpay = new Razorpay(options);
-    rzpay.open();
-  }, [Razorpay]);
+  
+  const handlePayment = ()=>{
+    navigate("/orderPlaced")
+    dispatch(clearCart())
+  }
 
   return cartItem.length === 0 ? (
-    <div className="w-1/6 m-auto text-center my-24">
+    <div className="md:w-1/6 m-auto text-center my-24">
       <img
         src={`${IMG_CDN_URL}${CART_IMAGE_ID}`}
         className="opacity-100"
@@ -107,29 +79,28 @@ const Cart = () => {
             {item.imageId && (
               <img
                 src={`${ITEM_IMG_CDN_URL}${item.imageId}`}
-                height="144"
-                width="156"
-                className="rounded object-cover"
+                
+                className="rounded w-[118px] h-32"
                 alt={item.name}
               />
             )}
-            <div className="flex items-center text-green-600 bg-slate-50 font-bold text-lg rounded-md absolute bottom-2 left-1/4">
+            <div className="flex items-center text-green-600 bg-slate-50 font-bold text-lg rounded-md absolute bottom-2 left-4">
               <button
                 className=" px-3 py-1 "
-                onClick={() => handleDecrease(item)}
+                onClick={()=>handleDecrease(item)}
               >
                 -
               </button>
               <h2>{item.quantity}</h2>
 
-              <button className=" px-3 py-1 " onClick={handleIncrease}>
+              <button className=" px-3 py-1 " onClick={()=>handleIncrease(item.id)}>
                 +
               </button>
             </div>
           </div>
         </div>
       ))}
-      <div className="space-x-3 flex justify-center items-center">
+      <div className="space-x-3 flex justify-center items-center mt-12">
         <button
           onClick={handlePayment}
           className="px-8 py-2 text-white font-semibold bg-lime-500 "

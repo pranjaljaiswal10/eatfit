@@ -16,7 +16,7 @@ const Favourite = () => {
     dispatch(removeItem());
   };
   return favouriteItems.length === 0 ? (
-    <div className="w-1/6 m-auto text-center my-24">
+    <div className="md:w-1/6 m-auto text-center my-24">
       <h1 className="font-bold text-xl p-6">Your favourite is empty</h1>
       <p className="text-neutral-600">
         Add item to the favourite restaurant list

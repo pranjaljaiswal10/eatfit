@@ -15,7 +15,7 @@ const Body = () => {
         Restaurants with online food delivery in Allahabad
       </p>
       <Restaurant_Filter />
-      <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 justify-items-center">
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 justify-items-center">
         {restaurant.length === 0 ? (
           <h1 className="lg:mt-28 mt-16 text-3xl font-bold lg:text-start text-center">
             No match found

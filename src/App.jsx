@@ -9,16 +9,15 @@ import { lazy, Suspense } from "react";
 import HomePageShimmer from "./components/HomePageShimmer";
 import RestaurantMenuShimmer from "./components/Restaurant_Menu_Shimmer";
 import "./App.css";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
 
-const Body=lazy(()=>import("./components/Body"))
-const Restaurant_Menu=lazy(()=>import("./components/Restaurant_Menu"))
-// const Login=lazy(()=>import("./components/Login"))
-// const Signup=lazy(()=>import("./components/Signup"))
-const About=lazy(()=>import("./components/About"))
-const Cart=lazy(()=>import("./components/Cart"))
-const Favourite=lazy(()=>import("./components/Favourite"))
+const Body = lazy(() => import("./components/Body"));
+const Restaurant_Menu = lazy(() => import("./components/Restaurant_Menu"));
+const Login = lazy(() => import("./components/Login"));
+const Signup = lazy(() => import("./components/Signup"));
+const About = lazy(() => import("./components/About"));
+const Cart = lazy(() => import("./components/Cart"));
+const Favourite = lazy(() => import("./components/Favourite"));
+const OrderSuccess=lazy(()=>import("./components/OrderSuccess"))
 
 const AppLayout = () => {
   return (
@@ -38,9 +37,9 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element:(
-          <Suspense fallback={<HomePageShimmer/>}>
-          <Body/>
+        element: (
+          <Suspense fallback={<HomePageShimmer />}>
+            <Body />
           </Suspense>
         ),
       },
@@ -48,25 +47,25 @@ const appRouter = createBrowserRouter([
         path: "/about",
         element: (
           <Suspense fallback={<div>Data is Loading...</div>}>
-          <About/>
+            <About />
           </Suspense>
         ),
       },
       {
         path: "/SignIn",
         element: (
-          <Login/>
-        // <Suspense fallback={<div>Data is Loading...</div>}>
-        // </Suspense>
+          <Suspense fallback={<div>Data is Loading...</div>}>
+            <Login />
+          </Suspense>
         ),
       },
       {
         path: "/cart",
         element: (
           <Suspense fallback={<div>Data is Loading...</div>}>
-          <PrivateRoute>
-            <Cart />
-          </PrivateRoute>
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
           </Suspense>
         ),
       },
@@ -74,27 +73,35 @@ const appRouter = createBrowserRouter([
         path: "/favourite",
         element: (
           <Suspense fallback={<div>Data is Loading...</div>}>
-          <PrivateRoute>
-            <Favourite />
-          </PrivateRoute>
+            <PrivateRoute>
+              <Favourite />
+            </PrivateRoute>
           </Suspense>
         ),
       },
       {
         path: "/restaurant/:resId",
         element: (
-          <Suspense fallback={<RestaurantMenuShimmer/>}>
-          <Restaurant_Menu/>
+          <Suspense fallback={<RestaurantMenuShimmer />}>
+            <Restaurant_Menu />
           </Suspense>
-        )
+        ),
       },
       {
         path: "/SignUp",
         element: (
-         <Signup />
-      //  <Suspense fallback={<div>Data is Loading...</div>}>
-      //  </Suspense>  
-      ),
+          <Suspense fallback={<div>Data is Loading...</div>}>
+            <Signup />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/orderPlaced",
+        element: (
+          <Suspense fallback={<div>Data is Loading...</div>}>
+            <OrderSuccess />
+          </Suspense>
+        ),
       },
     ],
   },
