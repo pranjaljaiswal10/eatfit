@@ -24,7 +24,6 @@ const Restaurant_Menu = () => {
     avgRatingString,
     areaName,
     sla,
-    feeDetails,
     totalRatingsString,
     costForTwoMessage,
     cloudinaryImageId,
@@ -38,7 +37,7 @@ const Restaurant_Menu = () => {
     imageId: cloudinaryImageId,
     name: name,
     rating: avgRatingString,
-    sla: sla,
+    sla:sla,
     cuisines: cuisines,
     areaName: areaName,
     id,
@@ -51,7 +50,7 @@ const Restaurant_Menu = () => {
     restaurantMenuDetail[2]?.groupedCard?.cardGroupMap?.REGULAR ||
     restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR ||
     {};
-
+  console.log(restaurantMenuDetail)
 
   return  restaurantMenuDetail.length===0?( <RestaurantMenuShimmer/>)
   : (
@@ -75,12 +74,9 @@ const Restaurant_Menu = () => {
             <span className="text-sm">{totalRatingsString}</span>
           </div>
         </div>
-        <span>{`${sla.lastMileTravelString}|₹ ${
-          feeDetails.totalFee / 100
-        } Delivery fee wiil apply`}</span>
-        <span className="block py-6">
+        <span className="block py-6 ">
           {`${sla.slaString}`}
-          <span className="px-6"> {costForTwoMessage} </span>
+          |<span> {costForTwoMessage} </span>
         </span>
       </div>
       <div className="bg-neutral-100 p-4 ">

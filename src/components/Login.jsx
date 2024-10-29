@@ -5,7 +5,7 @@ import { auth } from "../utils/firebase";
 import {  checkValidData2 } from "../utils/validation";
 
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email: "testuser123@gmail.com", password: "Testuser123@" });
   const navigate = useNavigate();
   const location = useLocation();
   const handleChange = (e) => {

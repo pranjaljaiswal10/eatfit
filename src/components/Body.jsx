@@ -11,7 +11,7 @@ const Body = () => {
   if (allRestaurant.length === 0) return <HomePageShimmer />;
   return (
     <div className="body mx-8 my-28 ">
-      <p className="text-xl font-bold ml-10 mr-10 lg:mr-0 text-center lg:text-start">
+      <p className="text-xl font-bold ml-10 mr-10 lg:mr-0 lg:pt-6 text-center lg:text-start">
         Restaurants with online food delivery in Allahabad
       </p>
       <Restaurant_Filter />
