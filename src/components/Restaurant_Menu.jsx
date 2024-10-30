@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Item_Category from "./Item_Category";
 import Nested_Item_Category from "./Nested_Item_Category";
 import { FaHeart, FaStar } from "react-icons/fa";
@@ -10,6 +10,7 @@ import {
   NORMAL_MENU_ITEM_TYPE_KEY,
 } from "../utils/constant";
 import RestaurantMenuShimmer from "./Restaurant_Menu_Shimmer";
+import { useEffect } from "react";
 
 
 const Restaurant_Menu = () => {
@@ -17,7 +18,7 @@ const Restaurant_Menu = () => {
   const { resId } = useParams();
   const favouriteItem = useSelector((store) => store.favourite.items);
   const restaurantMenuDetail = useRestaurantMenu(resId);
-
+  const {pathname}=useLocation()
   const {
     cuisines,
     name,
@@ -50,7 +51,9 @@ const Restaurant_Menu = () => {
     restaurantMenuDetail[2]?.groupedCard?.cardGroupMap?.REGULAR ||
     restaurantMenuDetail[4]?.groupedCard?.cardGroupMap?.REGULAR ||
     {};
-  console.log(restaurantMenuDetail)
+  useEffect(()=>{
+   window.scrollTo(0,0)
+  },[pathname])
 
   return  restaurantMenuDetail.length===0?( <RestaurantMenuShimmer/>)
   : (
