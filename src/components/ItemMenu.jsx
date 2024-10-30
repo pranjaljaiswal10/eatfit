@@ -23,11 +23,11 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
   };
 
   const handleIncreaseQuantity = () => {
-    dispatch(increaseQuantity());
+    dispatch(increaseQuantity(id));
   };
   const handleDecreaseQuantity = () => {
     foundItems.quantity > 1
-      ? dispatch(decreaseQuantity())
+      ? dispatch(decreaseQuantity(id))
       : dispatch(removeItem());
   };
 
@@ -62,7 +62,7 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
           <>
             <button
               className="absolute -bottom-2 left-10 font-bold text-green-600 bg-slate-200 px-3 py-1 "
-              onClick={handleDecreaseQuantity}
+              onClick={()=>handleDecreaseQuantity(id)}
             >
               -
             </button>
@@ -71,7 +71,7 @@ const ItemMenu = ({ name, description, imageId, price, defaultPrice, id }) => {
             </span>
             <button
               className="absolute -bottom-2 left-20 font-bold text-green-600 bg-slate-200 px-3 py-1"
-              onClick={handleIncreaseQuantity}
+              onClick={()=>handleIncreaseQuantity(id)}
             >
               +
             </button>

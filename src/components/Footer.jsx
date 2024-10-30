@@ -43,8 +43,6 @@ const Footer = () => {
             <li className={LiCss}>About</li>
             <li className={LiCss}>Careers</li>
             <li className={LiCss}>Team</li>
-            <li className={LiCss}>Foody Instamart</li>
-            <li className={LiCss}>Foody One</li>
           </ul>
         </div>
         <div className="lg:w-2/12 w-4/12 md:w-2/12">
